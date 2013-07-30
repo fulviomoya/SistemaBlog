@@ -1,6 +1,9 @@
 package org.fulvio.sistemablog;
 
-import org.fulvio.UI.ObservadorGrafico;
+
+import org.fulvio.UI.*;
+
+import javax.swing.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +14,12 @@ import org.fulvio.UI.ObservadorGrafico;
  */
 public class Sistema {
 	public static void main(String... args){
-		ObservadorGrafico observadorGrafico = new ObservadorGrafico();
+		try {
 
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			frmPrincipalVentana observadorGrafico  = new frmPrincipalVentana();
+		}
+		catch (ClassNotFoundException e) { }         catch (InstantiationException e) { }
+		catch (IllegalAccessException e) { }         catch (UnsupportedLookAndFeelException e) {  }
 	}
 }
