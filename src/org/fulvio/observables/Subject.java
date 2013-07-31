@@ -1,5 +1,7 @@
 package org.fulvio.observables;
 
+import org.fulvio.observadores.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: FMoya
@@ -8,7 +10,7 @@ package org.fulvio.observables;
  * To change this template use File | Settings | File Templates.
  */
 public interface Subject {
-	public void registerObserver();
-	public void removeObserver();
+	public void registerObserver(Observer observer);
+	public void removeObserver(Observer observer);
 	public void notifyObservers();
 }

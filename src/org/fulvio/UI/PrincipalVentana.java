@@ -1,6 +1,9 @@
 package org.fulvio.UI;
 
 
+import org.fulvio.observables.*;
+import org.fulvio.observadores.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,13 +15,16 @@ import java.awt.event.*;
  * Date: 07/17/13
  * Time: 02:39 AM
  */
-public class frmPrincipalVentana extends JFrame {
+public class PrincipalVentana extends JFrame implements Observer {
 	private JButton btnAdd;
 	private JButton btnClose;
-	private JTextField textFieldPostHistory;
+	private JTextArea textFieldPostHistory;
+	private Subject blog;
 
-	public frmPrincipalVentana(){
+	public PrincipalVentana(Subject blog){
 		super();
+		this.blog = blog;
+		blog.registerObserver(this);
 		initiazeComponents();
 		generateUI();
 	}
@@ -27,8 +33,9 @@ public class frmPrincipalVentana extends JFrame {
 		btnAdd   = new JButton();
 		btnClose = new JButton();
 
-		textFieldPostHistory = new JTextField();
+		textFieldPostHistory = new JTextArea();
 		textFieldPostHistory.setEditable(false);
+		textFieldPostHistory.setColumns(2);
 
 		btnAdd.setText("Add");
 		btnAdd.setMnemonic('A');
@@ -49,8 +56,6 @@ public class frmPrincipalVentana extends JFrame {
 				btnCloseActionPerformed();
 			}
 		});
-
-
 
 		this.setBounds(120,90, 500,300);
 		this.setResizable(false);
@@ -77,10 +82,14 @@ public class frmPrincipalVentana extends JFrame {
 		);
 	}
 	private void btnAddActionPerformed() {
-		new frmAgregarPost();
+		new AgregarPost(blog);
 	}
 	private void btnCloseActionPerformed() {
 		this.dispose();
+	}
 
+	@Override
+	public void update(String titulo, String mensaje) {
+		textFieldPostHistory.append(mensaje.toUpperCase() + "  \n - " + titulo+ "\n\n" );
 	}
 }

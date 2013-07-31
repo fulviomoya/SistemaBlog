@@ -1,19 +1,23 @@
 package org.fulvio.UI;
 
-import javax.swing.*;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import org.fulvio.observables.*;
 
-public class frmAgregarPost extends JFrame {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AgregarPost extends JFrame{
     private JButton btnPost;
     private JLabel  lblTitulo;
     private JLabel  lblMensaje;
     private JTextField txtTitulo;
     private JTextArea txtMensaje;
 
-    public frmAgregarPost()  {
+	private Blog blog;
+
+    public AgregarPost(Subject blog)  {
         super();
+	    this.blog = (Blog)blog;
         initializeComponents();
 	    generateUI();
     }
@@ -24,6 +28,7 @@ public class frmAgregarPost extends JFrame {
         lblTitulo    = new JLabel();
         txtTitulo   = new JTextField();
         txtMensaje  = new JTextArea();
+
 
         btnPost.setText("Postear");
         btnPost.addActionListener(new ActionListener() {
@@ -72,8 +77,9 @@ public class frmAgregarPost extends JFrame {
         );
     }
 	private void btnPostActionPerformed() {
-		//TODO: Poner funcionabilidad aqui.!
+		 blog.nuevoPost(txtTitulo.getText(), txtMensaje.getText());
 		JOptionPane.showMessageDialog(this, "Tu mensaje ha sido publicado correctamente", "Post Realizado",
 				                             JOptionPane.INFORMATION_MESSAGE);
+		this.dispose();
 	}
 }

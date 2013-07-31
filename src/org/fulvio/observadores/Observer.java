@@ -8,5 +8,5 @@ package org.fulvio.observadores;
  * To change this template use File | Settings | File Templates.
  */
 public interface Observer {
-	public void update();
+	public void update(String titulo, String mensaje);
 }
